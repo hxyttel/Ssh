@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.StudentFile" table="studentfile">
+		<id name="sfid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="sfphoto" type="java.lang.String"></property>
+		<property name="sfvoucher" type="java.lang.String"></property>
+		<property name="sfpaper" type="java.lang.String"></property>
+		<property name="sfdate" type="java.lang.String"></property>
+		<property name="sid" type="java.lang.Integer"></property>
+		<one-to-one name="student" class="com.ssh.pojo.Student" cascade="all" constrained="true"></one-to-one>
+	</class>
+</hibernate-mapping>

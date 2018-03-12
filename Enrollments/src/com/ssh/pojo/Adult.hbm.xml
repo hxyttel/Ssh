@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- 成人教育报名 -->
+	<class name="com.ssh.pojo.Adult" table="adult">
+		<id name="atid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="atname" type="java.lang.String"></property>
+		<property name="atpicture" type="java.lang.String"></property>
+		<property name="ataddress" type="java.lang.String"></property>
+		<property name="attitle" type="java.lang.String"></property>
+		<property name="atphoto1" type="java.lang.String"></property>
+		<property name="atcontent" type="java.lang.String"></property>
+		<property name="atphoto2" type="java.lang.String"></property>
+	</class>
+</hibernate-mapping>

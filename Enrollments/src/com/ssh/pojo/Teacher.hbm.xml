@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Teacher" table="teacher">
+		<id name="tid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="tname" type="java.lang.String" ></property>
+		<property name="tpassword" type="java.lang.String" ></property>
+		<property name="tsex" type="java.lang.String" ></property>
+		<property name="tage" type="java.lang.Integer" ></property>
+		<property name="tphone" type="java.lang.String" ></property>
+		<!-- <property name="ttype" type="java.lang.String" ></property> -->
+		<property name="tstatus" type="java.lang.String" ></property>
+		<property name="departmentid" type="java.lang.Integer" ></property>
+		<property name="tcreatetime" type="java.lang.String" ></property>
+		<property name="roleid" type="java.lang.Integer"></property>
+		<set name="student" cascade="all">
+			<key column="teacherid"></key>
+			<one-to-many class="com.ssh.pojo.Student"></one-to-many>		
+		</set>
+		<set name="workAssist" cascade="all">
+			<key column="teacherid"></key>
+			<one-to-many class="com.ssh.pojo.WorkAssist"></one-to-many>		
+		</set>
+		<many-to-one name="department" class="com.ssh.pojo.Department" column="departmentid" insert="false" update="false"></many-to-one>
+		<many-to-one name="roels" class="com.ssh.pojo.Roels" column="roleid" insert="false" update="false" ></many-to-one>
+	</class>
+</hibernate-mapping>

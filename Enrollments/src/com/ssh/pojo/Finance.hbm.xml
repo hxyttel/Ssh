@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Finance" table="finance">
+		<id name="feid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="feneeddmoney" type="java.lang.Float"></property>
+		<property name="frpractical" type="java.lang.Float"></property>
+		<property name="fedate" type="java.lang.String"></property>
+		<property name="feway" type="java.lang.String"></property>
+		<property name="sfestate" type="java.lang.String"></property>
+		<property name="studentid" type="java.lang.Integer" ></property>
+		<many-to-one name="student" class="com.ssh.pojo.Student" column="studentid" update="false" insert="false"></many-to-one>
+	</class>
+</hibernate-mapping>

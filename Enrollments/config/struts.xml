@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.devMode" value="true" />
+	<package name="defalut" namespace="/" extends="json-default">
+		<!-- action标签中的name是你服务器访问的名 class是每个action类的路径
+			result标签中name属性是action类中定义的方法中返回值的名 
+				type属性是判断你是跳转到一个jsp页面还是一个action,type可以省略不写
+		 -->
+		<!-- <action name="" class="" method="">
+			<result name="" type=""></result>
+		</action>  
+		-->
+		<!-- 默认的设置页面为404.jsp页面 -->
+		<!-- 错误页面 -->
+		<default-action-ref name="404"></default-action-ref>  
+	 	<action name="404">  
+	             <result>/Enrollment/404.jsp</result>  
+	 	</action>
+		<!-- 首页详情 -->
+		<action name="index" class="com.ssh.action.IndexAction" method="listindex">
+			<result name="success">index.jsp</result>
+		</action>
+		<!-- 移除后台用户登录session -->
+ 		<action name="RemoveTeacher" class="com.ssh.action.IndexAction" method="removeTeacherSession">
+			<result name="success">/backstage/index.jsp</result>
+		</action>
+		<!-- 移除前台用户登录session -->
+ 		<action name="login" class="com.ssh.action.IndexAction" method="removeAllSession">
+			<!-- <result name="success">/login.jsp</result> -->
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		<!-- 首页公告详情 
+		<action name="selectMore" class="com.ssh.action.IndexAction" method="selectNoticemore">
+			<result name="success">noticelist.jsp</result>
+		</action> -->
+		<!-- 首页公告对象 -->
+		<action name="selectNoticeById" class="com.ssh.action.IndexAction" method="selectNoticeById">
+			<result name="success">notice.jsp</result>
+		</action>
+		<!-- 检查教师表中是否存在电话号码 -->
+		<action name="checkPhone" class="com.ssh.action.TeacherAction" method="surePhone">
+			<result type="json" name="error">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		
+		<!-- 检查学生注册时是否存在相同电话号码 --> 
+		<action name="checkSphone" class="com.ssh.action.StudentAction" method="surePhone">
+			<result type="json" name="error">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		
+		<!-- 查询student中的艺考报名的list -->
+		<action name="listTrain" class="com.ssh.action.StudentAction" method="getArtList"></action>
+		<!-- 查询学生表中教育考试报名的学生list -->
+		<action name="educationList" class="com.ssh.action.StudentAction" method="getEducationList"></action>
+		<!-- 根据学生id删除学生信息 -->
+		<action name="deleteStudent" class="com.ssh.action.StudentAction" method="delete">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 根据id查询对应关于艺考学生的信息 -->
+		<action name="findArtStudent" class="com.ssh.action.StudentAction" method="findOneArt"></action>
+		<!-- 根据id查询对应关于教育考试学生的信息 -->
+		<action name="findEducation" class="com.ssh.action.StudentAction" method="findOneEducation"></action>
+		<!-- 修改学生表中艺考报名的信息 -->
+		<action name="updateArt" class="com.ssh.action.StudentAction" method="updateArt">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 修改学生表中教育考试报名的信息 -->
+		<action name="updateEducation" class="com.ssh.action.StudentAction" method="updateEducation">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 移除student中保存的session值 -->
+		<action name="removeSign" class="com.ssh.action.StudentAction" method="removeSign"></action>		
+		<!-- 移除upload中保存的session值 -->
+		<action name="removeUpload" class="com.ssh.action.UploadAction" method="removeUpload"></action>		
+		
+		<!-- 判断输入的密码是否正确 -->
+		<action name="checkPwd" class="com.ssh.action.TeacherAction" method="surePwd">
+			<result type="json" name="error">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 检查验证码输入是否正确 -->
+		<action name="checkCode" class="com.ssh.action.TeacherAction" method="sureCode">
+			<result type="json" name="error">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		
+		<!-- 修改Teacher的密码 -->
+		<action name="UpdatePassword" class="com.ssh.action.TeacherAction" method="updatePassword">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- Teacher找部门表 -->
+		<!-- <action name="FindListDepartment" class="com.ssh.action.TeacherAction" method="findListDepartment">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action> -->
+		
+		<!--添加teacher表 -->
+		<action name="AddTeacher" class="com.ssh.action.TeacherAction" method="addTeacher">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 遍历teacher表 -->
+		<action name="ListTeacher" class="com.ssh.action.TeacherAction" method="listTeacher"></action>
+		
+		<!-- 遍历教师表(模糊查询)-->
+		<action name="likeTeachers" class="com.ssh.action.TeacherAction" method="likeTeacher"></action>
+		
+		<!-- 查询Teacher对象 -->
+		<action name="FindTeacher" class="com.ssh.action.TeacherAction" method="findTeacher"></action>
+		
+		<!-- 修改Teacher -->
+		<action name="UpdateTeacher" class="com.ssh.action.TeacherAction" method="updateTeacher">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除Teacher -->
+		<action name="DeleteTeacher" class="com.ssh.action.TeacherAction" method="deleteTeacher">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 后台登录 -->
+		<action name="adminLogin" class="com.ssh.action.TeacherAction" method="adminLogin">
+			<result name="success">/backstage/index.jsp</result>
+		</action>
+		
+		<!-- 轮播图添加 -->
+		<action name="AddIndexpicture" class="com.ssh.action.IndexPictureAction" method="savePicture">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 遍历轮播图 -->
+		<action name="ListIndexpicture" class="com.ssh.action.IndexPictureAction" method="listPicture">
+		</action>
+		<!-- 轮播图找对象 -->
+		<action name="FindPicture" class="com.ssh.action.IndexPictureAction" method="findPicture">
+		</action>
+		<!-- 修改轮播图 -->
+		<action name="UpdatePicture" class="com.ssh.action.IndexPictureAction" method="updatePicture">
+				<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 删除轮播图 -->
+		<action name="DeletePicture" class="com.ssh.action.IndexPictureAction" method="deletePicture">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 增加首页内容表 -->
+		<action name="SaveContent" class="com.ssh.action.IndexContentAction" method="savecontent">
+			<result name="success">/backstage/index.jsp</result>
+		</action>
+		
+		<!-- 遍历首页内容 -->
+		<action name="ListIndexContent" class="com.ssh.action.IndexContentAction" method="listContent">
+		</action>
+		<!-- 查找首页对象 -->
+		<action name="FindContent" class="com.ssh.action.IndexContentAction" method="findContent">
+		</action>
+		
+		<!-- 修改首页 -->
+		<action name="UpdateContent" class="com.ssh.action.IndexContentAction" method="updateContent">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 增加联系表 -->
+		<action name="AddContact" class="com.ssh.action.ContactAction" method="AddContact">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 遍历联系表 -->
+		<action name="ListContact" class="com.ssh.action.ContactAction" method="ListContact">
+		</action>
+		<!-- 删除联系表 -->
+		<action name="DeleteContact" class="com.ssh.action.ContactAction" method="deleteContact"> 
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 查找联系表对象 -->
+		<action  name="FindContact" class="com.ssh.action.ContactAction" method="findContact" ></action>
+		<!-- 修改联系表 -->
+		<action name="UpdateContact" class="com.ssh.action.ContactAction" method="updateContact">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 遍历联系表中所有信息(模糊查询) -->
+		<action name="likeContact" class="com.ssh.action.ContactAction" method="getlikeContact"></action>
+		
+		<!-- 遍历公告表 -->
+		<action name="ListNotice" class="com.ssh.action.NoticeAction" method="listNotice"></action>
+		<!-- 遍历公告表(模糊查询) -->
+		<action name="likeNotices" class="com.ssh.action.NoticeAction" method="likeNotice"></action>
+		
+		<!-- 增加公告 -->
+		<action name="AddNotice" class="com.ssh.action.NoticeAction" method="addNotice">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 查找公告对象 -->
+		<action name="FindNotice" class="com.ssh.action.NoticeAction" method="findNotice">
+		</action>
+		<!-- 修改公告对象 -->
+		<action name="UpdateNotice" class="com.ssh.action.NoticeAction" method="updateNotice">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除公告 -->
+		<action name="DeleteNotice" class="com.ssh.action.NoticeAction" method="deleteNotice">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 增加部门 -->
+		<action name="AddDepartment" class="com.ssh.action.DepartmentAction" method="addDepartment">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 遍历部门表 -->
+		<action name="ListDepartment" class="com.ssh.action.DepartmentAction" method="listDepartment">
+		</action>
+		
+		<!-- 遍历联系表中所有信息(模糊查询) -->
+		<action name="likeDepartment" class="com.ssh.action.DepartmentAction" method="getlikeDepartment"></action>
+		
+		<!-- 查询部门对象 -->
+		<action name="FindDepartment" class="com.ssh.action.DepartmentAction" method="findDepartment"></action>
+		
+		<!-- 修改部门表 -->
+		<action name="UpdateDepartment" class="com.ssh.action.DepartmentAction" method="updateDepartment">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除部门表 -->
+		<action name="DeleteDepartment" class="com.ssh.action.DepartmentAction" method="deleteDepartment">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 保存院校专业表信息 -->
+		<action name="saveAcademy" class="com.ssh.action.AcademyAction" method="saveAcademy">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 查询出所有院校 -->
+		<action name="getAcademy" class="com.ssh.action.MajorAction" method="getAllSchool">
+			<result name="success">/backstage/major.jsp</result>
+		</action>
+		<!-- 查询出所有老师-->
+		<action name="train" class="com.ssh.action.StudentAction" method="getAllTeacher">
+			<result name="success">/backstage/train.jsp</result>
+		</action>
+		<!-- 查询出所有老师和院校-->
+		<action name="education" class="com.ssh.action.StudentAction" method="getAllTeacherAndAcademy">
+			<result name="success">/backstage/education.jsp</result>
+		</action>
+		<!-- 查询出所有部门 -->
+		<action name="teacher" class="com.ssh.action.TeacherAction" method="findListDepartment">
+			<result name="success">/backstage/Teacher.jsp</result>
+		</action>
+		<!-- 查询成人高考学校名称 -->
+		<action name="getSchool_adult" class="com.ssh.action.AcademyAction" method="getSchool">
+			<result name="success">/adult.jsp</result>
+		</action>
+		<!-- 查询远程报名学校名称 -->
+		<action name="getSchool_country" class="com.ssh.action.AcademyAction" method="getSchool">
+			<result name="success">/country.jsp</result>
+		</action>
+		<!-- 查询国家开放大学学校名称 -->
+		<action name="getSchool_distance" class="com.ssh.action.AcademyAction" method="getSchool">
+			<result name="success">/distance.jsp</result>
+		</action>
+		<!-- 关联成人高考学校专业 -->
+		<action name="getMajor_adult" class="com.ssh.action.AcademyAction" method="getMajor"></action>
+		<!-- 关联学校远程报名专业 -->
+		<action name="getMajor_distance" class="com.ssh.action.AcademyAction" method="getMajor"></action>
+		<!-- 关联国家开放大学报名专业 -->
+		<action name="getMajor_country" class="com.ssh.action.AcademyAction" method="getMajor"></action>
+		<!-- 遍历院校专业表中所有信息 -->
+		<action name="listAcademy" class="com.ssh.action.AcademyAction" method="getListAcademy"></action>
+		
+		<!-- 遍历院校专业表中所有信息(模糊查询) -->
+		<action name="likeAcademy" class="com.ssh.action.AcademyAction" method="getlikeAcademy"></action>
+		
+		<!-- 查询院校专业表 -->
+		<action name="findAcademy" class="com.ssh.action.AcademyAction" method="getOneAcademy"></action>
+		
+		<!-- 修改院校专业表 -->
+		<action name="updateAcademy" class="com.ssh.action.AcademyAction" method="update">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除院校专业表 -->
+		<action name="deleteAcademy" class="com.ssh.action.AcademyAction" method="delete">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 遍历六个报名表中所有信息 -->
+		<action name="alltype" class="com.ssh.action.AlltypeAction" method="getAlltype"></action>
+		
+		<!-- 会计报名页面得到尾部和联系电话 -->
+		<action name="accounting" class="com.ssh.action.IndexAction" method="listindex">
+			<result name="success">accounting.jsp</result>
+		</action>
+		
+		<!-- 艺考报名页面得到尾部和联系电话 -->
+		<action name="arts" class="com.ssh.action.IndexAction" method="listindex">
+			<result name="success">arts.jsp</result>
+		</action>
+		
+		<!-- 职业资格报名页面得到尾部和联系电话 -->
+		<action name="vocational" class="com.ssh.action.IndexAction" method="listindex">
+			<result name="success">vocational.jsp</result>
+		</action>
+		
+		<!-- 检查身份证是否重复 -->
+		<action name="checkIdcard" class="com.ssh.action.StudentAction" method="sureIdcard">
+			<result type="json" name="error">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		
+		<!-- 文件上传 -->
+		<action name="upload" class="com.ssh.action.UploadAction" method="Upload">
+			<result name="success">upload.jsp</result>
+		</action>
+		
+		<!-- 添加文件 -->
+		<action name="AddUpload" class="com.ssh.action.UploadAction" method="addUpload">
+			<result name="success" type="redirectAction">index</result>
+			<result name="fail" type="redirectAction">upload</result>
+		</action>
+		
+		<!-- 遍历文件 -->
+		<action name="ListUpload" class="com.ssh.action.UploadAction" method="listUpload"></action>
+		
+		<!-- 遍历文件(模糊查询) -->
+		<action name="likeUpload" class="com.ssh.action.UploadAction" method="likeUpload"></action>
+		
+		<!-- 查文件对象 -->
+		<action name="FindUpload" class="com.ssh.action.UploadAction" method="findUpload"> </action>
+		
+		<!-- 修改文件对象 -->
+		<action name="UpdateUpload" class="com.ssh.action.UploadAction" method="updateUpload">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除文件 -->
+		<action name="DeleteUpload" class="com.ssh.action.UploadAction" method="deleteUpload">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 学校招生简章添加 -->
+		<action name="Addgeneral" class="com.ssh.action.GeneralAction" method="saveGeneral">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 遍历招生简章文件 -->
+		<action name="ListGeneral" class="com.ssh.action.GeneralAction" method="listGeneral"></action>
+		
+		<!-- 遍历招生简章文件(模糊查询) -->
+		<action name="likeGenerals" class="com.ssh.action.GeneralAction" method="likeGeneral"></action>
+		
+		<!-- 查找招生简章对象 -->
+		<action name="FindGeneral" class="com.ssh.action.GeneralAction" method="findGeneral"> </action>
+		<!-- 修改招生简章对象 -->
+		<action name="updateGeneral" class="com.ssh.action.GeneralAction" method="updateGeneral">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 删除招生简章对象 -->
+		<action name="DeleteGeneral" class="com.ssh.action.GeneralAction" method="DeleteGeneral">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 遍历专业表 -->
+		<action name="listMajor" class="com.ssh.action.MajorAction" method="getMajorList"></action>
+		
+		<!-- 根据id获取到专业表信息 -->
+		<action name="findMajor" class="com.ssh.action.MajorAction" method="getOneMajor"> </action>
+		
+		<!-- 添加专业信息 -->
+		<action name="saveMajor" class="com.ssh.action.MajorAction" method="addMajor">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 修改专业表 -->
+		<action name="updateMajor" class="com.ssh.action.MajorAction" method="Major">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 删除专业信息 -->
+		<action name="deleteMajor" class="com.ssh.action.MajorAction" method="deleteMajor">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 遍历热门专业 -->
+		<action name="ListHotmajor" class="com.ssh.action.HotmajorAction" method="listHotmajor">
+		</action>
+		
+		<!-- 遍历热门专业(模糊查询) -->
+		<action name="likeHotMahors" class="com.ssh.action.HotmajorAction" method="likeHotmajor">
+		</action>
+		
+		<!-- 添加热门专业 -->
+		<action name="AddHotmajor" class="com.ssh.action.HotmajorAction" method="addHotmajor">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 查找热门专业对象 -->
+		<action name="FindHotmajor" class="com.ssh.action.HotmajorAction" method="findHotmajor"></action>
+	
+		<!-- 修改热门专业 -->
+		<action name="UpdateHotmajor" class="com.ssh.action.HotmajorAction" method="updateHotmajor">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除热门专业 -->
+		<action name="DeleteHotmajor" class="com.ssh.action.HotmajorAction" method="deleteHotmajor">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 招生简章前台获取后台学校-->
+		<action name="school" class="com.ssh.action.GeneralAction" method="school">
+			<result name="success">schoolRecruit.jsp</result>
+		</action>
+		<!-- 招生简章前台获取后台学校(专业有关)-->
+		<action name="school_2" class="com.ssh.action.GeneralAction" method="school_2">
+			<result name="success">schoolRecruit_2.jsp</result>
+		</action>
+		
+		<!-- 成人教育 -->
+		<action name="AdultList" class="com.ssh.action.AdultAction" method="getAdultList">
+			<result name="success">Adult.jsp</result>
+		</action>
+
+		<!-- 删除日志文件 -->
+		<action name="DeleteLogf" class="com.ssh.action.LogfAction" method="deletelogf">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 遍历日志专业 -->
+		<action name="GetLogfList" class="com.ssh.action.LogfAction" method="getLogfLists">
+		</action>
+		<!-- 查找工作助手 -->
+		<!-- <action name="SelectworkAssist" class="com.ssh.action.WorkAssistAction" method="selectAssist">
+			<result type="json">
+				<param name="root">lis</param>
+			</result>
+		</action> -->
+	    <!-- 删除工作助手-->
+		<action name="DeleteAssist" class="com.ssh.action.WorkAssistAction" method="deleteAssist">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+
+		<!-- 根据id查询成人教育的信息 -->
+		<action name="findListAdult" class="com.ssh.action.AdultAction" method="findListAdult"></action>
+		<!-- 修改成人教育的信息 -->
+		<action name="updateAdult" class="com.ssh.action.AdultAction" method="updateAdult">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 会计报名 -->
+		<action name="AccountingList" class="com.ssh.action.AccountingAction" method="getAccountingList">
+			<result name="success">Accounting.jsp</result>
+		</action>
+		<!-- 根据id查询会计的信息 -->
+		<action name="findListAccounting" class="com.ssh.action.AccountingAction" method="findListAccounting"></action>
+		<!-- 修改会计的信息 -->
+		<action name="updateAccounting" class="com.ssh.action.AccountingAction" method="updateAccounting">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 国家开放 -->
+		<action name="CountryList" class="com.ssh.action.CountryAction" method="getCountryList">
+			<result name="success">Country.jsp</result>
+		</action>
+		<!-- 根据id查询国家开放的信息 -->
+		<action name="findListCountry" class="com.ssh.action.CountryAction" method="findListCountry"></action>
+		<!-- 修改国家开放的信息 -->
+		<action name="updateCountry" class="com.ssh.action.CountryAction" method="updateCountry">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 远程教育报名 -->
+		<action name="DistanceList" class="com.ssh.action.DistanceAction" method="getDistanceList">
+			<result name="success">Distance.jsp</result>
+		</action>
+		<!-- 根据id查询远程教育报名的信息 -->
+		<action name="findListDistance" class="com.ssh.action.DistanceAction" method="findListDistance"></action>
+		<!-- 修改远程教育报名的信息 -->
+		<action name="updateDistance" class="com.ssh.action.DistanceAction" method="updateDistance">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 艺考培训 -->
+		<action name="ArtsList" class="com.ssh.action.ArtsAction" method="getArtsList">
+			<result name="success">Arts.jsp</result>
+		</action>
+		<!-- 根据id查询艺考培训的信息 -->
+		<action name="findListArts" class="com.ssh.action.ArtsAction" method="findListArts"></action>
+		<!-- 修改艺考培训的信息 -->
+		<action name="updateArts" class="com.ssh.action.ArtsAction" method="updateArts">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		<!-- 职业资格 -->
+		<action name="VocationalList" class="com.ssh.action.VocationalAction" method="getVocationalList">
+			<result name="success">Vocational.jsp</result>
+		</action>
+		<!-- 根据id职业资格的信息 -->
+		<action name="findListVocational" class="com.ssh.action.VocationalAction" method="findListVocational"></action>
+		<!-- 修改职业资格的信息 -->
+		<action name="updateVocational" class="com.ssh.action.VocationalAction" method="updateVocational">
+			<result type="json" name="success">
+				<param name="root">fail</param>
+			</result>
+		</action>
+		
+		<!-- 根据老师id查询学生 -->
+		<action name="fiance" class="com.ssh.action.FianceAction" method="TeaLookStu">
+			<result name="success">/backstage/fiance.jsp</result>
+		</action>
+		
+		<!-- 遍历缴费 -->
+		<action name="ListFiance" class="com.ssh.action.FianceAction" method="listFiance" ></action>
+		
+		<!-- 遍历缴费(模糊查询) -->
+		<action name="likeFiances" class="com.ssh.action.FianceAction" method="likeFiance" ></action>
+	
+		<!-- 添加缴费 -->
+		<action name="AddFiance" class="com.ssh.action.FianceAction" method="addFiance">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 查找缴费对象 -->
+		<action name="FindFiance" class="com.ssh.action.FianceAction" method="findFiance"></action>
+		
+		<!-- 查找缴费对象 -->
+		<action name="listFiances" class="com.ssh.action.FianceAction" method="listFiancePage"></action>
+		
+		<!-- 修改缴费 -->
+		<action name="UpdateFiance" class="com.ssh.action.FianceAction" method="updateFiance">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		
+		<!-- 删除缴费 -->
+		<action name="DeleteFiance" class="com.ssh.action.FianceAction" method="deleteFiance">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 删除日志文件
+		<action name="DeleteLogf" class="com.ssh.action.LogfAction" method="deletelogf">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		遍历日志专业
+		<action name="GetLogfList" class="com.ssh.action.LogfAction" method="getLogfLists">
+		</action> -->
+		<!-- 添加共享合作 -->
+		<action name="Addjoinwork" class="com.ssh.action.JoinworkAction" method="saveJoinwork">
+			<result type="json" name="success">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 首业遍历共享合作 -->
+		<action name="Joinwork" class="com.ssh.action.JoinworkAction" method="joinwork">
+			<result name="success">/train.jsp</result>
+		</action>
+		<action name="DetailsJoinWork" class="com.ssh.action.JoinworkAction" method="detailsJoinWork">
+			<result name="success">/detailstrain.jsp</result>
+		</action>
+		<!-- 遍历共享合作 -->
+		<action name="ListJoinwork" class="com.ssh.action.JoinworkAction" method="listJoinwork"></action>
+		
+		<!-- 遍历共享合作(模糊查询) -->
+		<action name="likeJoinworks" class="com.ssh.action.JoinworkAction" method="likeJoinwork"></action>
+		
+		<!-- 查找共享合作 -->
+		<action name="FindJoinwork" class="com.ssh.action.JoinworkAction" method="findJoinwork"> </action>
+		<!-- 修改共享合作 -->
+		<action name="updateJoinwork" class="com.ssh.action.JoinworkAction" method="updateJoinwork">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!-- 删除共享合作 -->
+		<action name="DeleteJoinwork" class="com.ssh.action.JoinworkAction" method="deleteJoinwork">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+
+		<!-- 导入缴费  -->
+		<action name="ImportFiance" class="com.ssh.action.ImportAction" method="importFianceInto">
+			<result name="success" type="json" >
+				<param name="root">data</param>
+			</result>
+		</action>
+		<!--  遍历角色表 
+		<action name="ListRole" class="com.ssh.action.RoleAction" method="listRole"></action>  -->
+		
+		<!-- 缴费下载文件 -->
+		<action name="fianceUpload" class="com.ssh.action.ModelUploadAction" method="down">
+			<!-- 所下載文件的目录 -->
+			<param name="inputPath">/file</param>
+			<result name="success" type="stream">
+				<!-- 以二进制形式传输 -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 对应Action中inputStream的名称 -->
+				<param name="inputName">ipts</param>
+				<!-- 以附件形式下载 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<!-- 文件缓冲区大小 -->
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+	</package>
+</struts>
+	

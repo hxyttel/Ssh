@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Jurisdication" table="jurisdication">
+		<id name="jtid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="jtname" type="java.lang.String"></property>
+		<property name="jtsort" type="java.lang.Integer"></property>
+		<property name="jtstatus" type="java.lang.Integer"></property>
+		<property name="jturl" type="java.lang.String"></property>
+		<set name="roeljur" cascade="all">
+			<key column="jid"></key>
+			<one-to-many class="com.ssh.pojo.Rolejur" ></one-to-many>
+		</set>
+	</class>
+
+</hibernate-mapping>

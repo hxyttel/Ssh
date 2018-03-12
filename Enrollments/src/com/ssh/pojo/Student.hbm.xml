@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Student" table="student">
+		<id name="sid" type="java.lang.Integer">
+			 <generator class="native"></generator>
+		</id>
+		<property name="stuno" type="java.lang.String"></property>
+		<property name="sname" type="java.lang.String"></property>
+		<property name="snumber" type="java.lang.String"></property>
+		<property name="sphone" type="java.lang.String"></property>
+		<property name="academyid" type="java.lang.Integer"></property>
+		<property name="teacherid" type="java.lang.Integer"></property>
+		<property name="sgradations" type="java.lang.String"></property>
+		<property name="ssystem" type="java.lang.String"></property>
+		<property name="acontent" type="java.lang.String"></property>
+		<property name="sdate" type="java.lang.String"></property>
+		<property name="stype" type="java.lang.String"></property>
+		<property name="festate" type="java.lang.String"></property>
+		
+		<many-to-one name="academy" class="com.ssh.pojo.Academy" column="academyid" insert="false" update="false"></many-to-one>
+		<many-to-one name="teacher" class="com.ssh.pojo.Teacher" column="teacherid" insert="false" update="false"></many-to-one>
+		<one-to-one name="sfile" class="com.ssh.pojo.StudentFile" cascade="all"></one-to-one>
+		<set name="finance" cascade="all">
+			<key column="studentid"></key>
+			<one-to-many class="com.ssh.pojo.Finance"></one-to-many>
+		</set>	
+	</class>
+</hibernate-mapping>

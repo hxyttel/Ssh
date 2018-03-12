@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	 <!-- 配置每一个dao类 
+	 	id属性（名字是任意取，但最好是取当前dao的类名） class属性(是当前dao类的路径)
+		name属性是你要对应的对象名 ref属性也是对应的对象名  
+				（配置xml规则:action对应的的是service的在applicationContext.xml的bean里面的id名字）
+						service对应的的是dao的在applicationContext.xml的bean里面的id名字
+							dao是对应hibernateTemplate 
+					name属性和ref属性的值最好一样
+					
+		每一个action类对应不同的action和service和dao
+		
+					
+		eg:<bean id="xxxDaoImpl" class="com.ssh.dao.impl.xxxDaoImpl">
+			<property name="hibernateTemplatee" ref="hibernateTemplate"></property>
+		</bean> -->
+		<!-- 教师表 -->
+		<bean id="teacherDao" class="com.ssh.dao.impl.TeacherDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 学生表 -->
+		<bean id="studentDao" class="com.ssh.dao.impl.StudentDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 院校专业表  -->
+		<bean id="academyDao" class="com.ssh.dao.impl.AcademyDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+	
+		<!-- 热门专业表 -->
+		<bean id="hotmajorDao" class="com.ssh.dao.impl.HotmajorDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 轮播图表 -->
+		<bean id="indexpictureDao" class="com.ssh.dao.impl.IndexPictureDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 首页内容表 -->
+		<bean id="indexcontentDao" class="com.ssh.dao.impl.IndexContentDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 联系表 -->
+		<bean id="contactDao" class="com.ssh.dao.impl.ContactDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 公告表 -->
+		<bean id="noticeDao" class="com.ssh.dao.impl.NoticeDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		
+		<!-- 部门表 -->
+		<bean id="departmentDao" class="com.ssh.dao.impl.DepartmentDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 艺考培训报名表 -->
+		<bean id="artsDao" class="com.ssh.dao.impl.ArtsDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 职业资格报名表 -->
+		<bean id="vocationalDao" class="com.ssh.dao.impl.VocationalDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 会计报名表 -->
+		<bean id="accountingDao" class="com.ssh.dao.impl.AccountingDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 成人教育报名表 -->
+		<bean id="adultDao" class="com.ssh.dao.impl.AdultDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 国家开放报名表 -->
+		<bean id="countryDao" class="com.ssh.dao.impl.CountryDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 远程教育报名表 -->
+		<bean id="distanceDao" class="com.ssh.dao.impl.DistanceDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 招生简章 -->
+		<bean id="generalDao" class="com.ssh.dao.impl.GeneralDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+
+		<!-- 文件上传表 -->
+		<bean id="studentfileDao" class="com.ssh.dao.impl.UploadDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 专业表 -->
+		<bean id="majorDao" class="com.ssh.dao.impl.MajorDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 日志表 -->
+		<bean id="logfDao" class="com.ssh.dao.impl.LogfDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+
+		<!-- 工作助手 -->
+		<bean id="workAssistDao" class="com.ssh.dao.impl.WorkAssistDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+
+		
+		<!-- 缴费表 -->
+		<bean id="fianceDao" class="com.ssh.dao.impl.FianceDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		
+		<!-- 角色表 -->
+		<bean id="roleDao" class="com.ssh.dao.impl.RoleDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 共享合作 -->
+		<bean id="joinworkDao" class="com.ssh.dao.impl.JoinworkDaoImpl" >
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+</beans>

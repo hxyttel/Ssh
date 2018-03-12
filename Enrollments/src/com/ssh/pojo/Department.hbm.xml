@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Department" table="department">
+		<id name="did" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="dnumber" type="java.lang.String"></property>
+		<property name="ddatetime" type="java.lang.String"></property>
+		<property name="daddress" type="java.lang.String"></property>
+		<property name="dname" type="java.lang.String"></property>
+		<set name="Teacher"  cascade="all">
+			<key column="departmentid"></key>
+			<one-to-many class="com.ssh.pojo.Teacher" ></one-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

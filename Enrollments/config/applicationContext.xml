@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置读取数据源文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="${jdbc.driver}"></property>
+	<property name="url" value="${jdbc.url}"></property>
+	<property name="username" value="${jdbc.username}"></property>
+	<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<!-- 配置sessionfactory 配置hibernate(美化语言。。。) -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<prop key="hibernate.hbm2ddl.auto">update</prop>
+			<prop key="hibernate.show_sql">true</prop>
+			<prop key="hibernate.format_sql">true</prop>
+		</props>
+	</property>
+	<!-- 配置mappingSource  每个实体类就会有一个xxx.hbm.xml,对应一个valeu值 xxx代表的是实体类的名字  xxx也必须是实体类名-->
+	<property name="mappingResources">
+	<list>
+		<value>com/ssh/pojo/Hotmajor.hbm.xml</value>
+		<value>com/ssh/pojo/Indexcontent.hbm.xml</value>
+		<value>com/ssh/pojo/Indexpicture.hbm.xml</value>
+		<value>com/ssh/pojo/Notice.hbm.xml</value>
+		<value>com/ssh/pojo/Teacher.hbm.xml</value>
+		<value>com/ssh/pojo/Student.hbm.xml</value>
+		<value>com/ssh/pojo/Department.hbm.xml</value>
+		<value>com/ssh/pojo/Academy.hbm.xml</value>
+		<value>com/ssh/pojo/General.hbm.xml</value>
+		<value>com/ssh/pojo/Accounting.hbm.xml</value>
+		<value>com/ssh/pojo/Adult.hbm.xml</value>
+		<value>com/ssh/pojo/Arts.hbm.xml</value>
+		<value>com/ssh/pojo/Contact.hbm.xml</value>
+		<value>com/ssh/pojo/Country.hbm.xml</value>
+		<value>com/ssh/pojo/Distance.hbm.xml</value>
+		<value>com/ssh/pojo/Vocational.hbm.xml</value>
+		<value>com/ssh/pojo/Major.hbm.xml</value>
+		<value>com/ssh/pojo/StudentFile.hbm.xml</value>
+		<value>com/ssh/pojo/Logf.hbm.xml</value>
+		<value>com/ssh/pojo/Finance.hbm.xml</value>
+
+		<value>com/ssh/pojo/WorkAssist.hbm.xml</value>
+
+		<value>com/ssh/pojo/Joinwork.hbm.xml</value>
+		<value>com/ssh/pojo/Jurisdication.hbm.xml</value>
+		<value>com/ssh/pojo/Roels.hbm.xml</value>
+		<value>com/ssh/pojo/Rolejur.hbm.xml</value>
+	</list>
+	</property>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 配置HibernateTemplate(相当于hibernate的session) -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	<!-- 导入xml包-->
+	<import resource="applicationContext-dao.xml"/>
+	<import resource="applicationContext-action.xml"/>
+	<import resource="applicationContext-service.xml"/>
+	
+</beans>

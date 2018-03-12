@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- 会计报名 -->
+	<class name="com.ssh.pojo.Accounting" table="accounting">
+		<id name="agid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="agname" type="java.lang.String"></property>
+		<property name="agpicture" type="java.lang.String"></property>
+		<property name="agaddress" type="java.lang.String"></property>
+		<property name="agtitle" type="java.lang.String"></property>
+		<property name="agphoto1" type="java.lang.String"></property>
+		<property name="agphoto2" type="java.lang.String"></property>
+	</class>
+</hibernate-mapping>

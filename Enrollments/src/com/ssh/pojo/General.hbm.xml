@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.General" table="general">
+		<id name="gid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="glogo" type="java.lang.String"></property>
+		<property name="gintroduce" type="java.lang.String"></property>
+		<property name="gpicture" type="java.lang.String"></property>
+		<property name="gtitle" type="java.lang.String"></property>
+		<property name="gmajor" type="java.lang.String"></property>
+		<property name="gdiploma" type="java.lang.String"></property>
+		<one-to-one name="academy" cascade="all" class="com.ssh.pojo.Academy"></one-to-one>
+	</class>
+</hibernate-mapping>

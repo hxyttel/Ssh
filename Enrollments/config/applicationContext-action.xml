@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+<!-- 配置每一个anction类 
+	 	id属性（名字是任意取，但最好是取当前action的类名） class属性(是当前action类的路径)
+		name属性是你要对应的对象名 ref属性也是对应的对象名  
+				（配置xml规则:action对应的的是service的在applicationContext.xml的bean里面的id名字）
+						service对应的的是dao的在applicationContext.xml的bean里面的id名字
+							dao是对应hibernateTemplate 
+					name属性和ref属性的值最好一样
+				每一个action类对应不同的action和service和dao
+		
+		
+		eg:<bean id="xxxAction" class="com.ssh.action.xxxAction">
+			  <property name="xxxService" ref="xxxService"></property>
+			</bean> -->
+		<!-- 首页详情 -->
+		<bean id="indexAction" class="com.ssh.action.IndexAction">
+			<property name="indexpictureService" ref="indexpictureService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+			<property name="noticeService" ref="noticeService"></property>
+			<property name="teacherService" ref="teacherService"></property>
+			<property name="hotmajorService" ref="hotmajorService"></property>
+		</bean>
+		<!-- 教师表 -->
+		<bean id="teacherAction" class="com.ssh.action.TeacherAction">
+			<property name="teacherService" ref="teacherService"></property>
+			<property name="departmentService" ref="departmentService"></property>
+			<property name="logfService" ref="logfService"></property>
+			<property name="roleService" ref="roleService"></property>
+			<property name="workAssistService" ref="workAssistService"></property>
+		</bean>
+		<!-- 学生表 -->
+		<bean id="studentAction" class="com.ssh.action.StudentAction">
+			<property name="studentService" ref="studentService"></property>
+			<property name="teacherService" ref="teacherService"></property>
+			<property name="academyService" ref="academyService"></property>
+		</bean>
+		<!-- 院校专业表  -->
+		<bean id="academyAction" class="com.ssh.action.AcademyAction">
+			<property name="academyService" ref="academyService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+		</bean>
+		
+		<!-- 轮播图表 -->
+		<bean id="indexpictureAction" class="com.ssh.action.IndexPictureAction">
+			<property name="indexpictureService" ref="indexpictureService"></property>
+		</bean>
+		
+		<!-- 首页内容表 -->
+		<bean id="indexcontentAction" class="com.ssh.action.IndexContentAction">
+			<property name="indexcontentService" ref="indexcontentService"></property>
+		</bean>
+		
+		<!-- 联系表 -->
+		<bean id="contactAction" class="com.ssh.action.ContactAction">
+			<property name="contactService" ref="contactService"></property>
+		</bean>
+		
+		<!-- 公告表 -->
+		<bean id="noticeAction" class="com.ssh.action.NoticeAction">
+			<property name="noticeService" ref="noticeService"></property>
+		</bean>
+		
+		<!-- 文件上传表 -->
+		<bean id="studentfileAction" class="com.ssh.action.UploadAction">
+			<property name="studentfileService" ref="studentfileService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+			<property name="studentService" ref="studentService"></property>
+		</bean>
+		
+		<!-- 所有报名类型表整合 -->
+		<bean id="alltypeAction" class="com.ssh.action.AlltypeAction">
+			<property name="accountingService" ref="accountingService"></property>
+			<property name="artsService" ref="artsService"></property>
+			<property name="vocationalService" ref="vocationalService"></property>
+			<property name="adultService" ref="adultService"></property>
+			<property name="countryService" ref="countryService"></property>
+			<property name="distanceService" ref="distanceService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+		</bean>
+		<!-- 部门表 -->
+		<bean id="departmentAction" class="com.ssh.action.DepartmentAction">
+			<property name="departmentService" ref="departmentService"></property>
+		</bean>
+		<!-- 专业表 -->
+		<bean id="majorAction" class="com.ssh.action.MajorAction">
+			<property name="majorService" ref="majorService"></property>
+			<property name="academyService" ref="academyService"></property>
+		</bean>
+		
+		<!-- 热门专业表 -->
+		<bean id="hotmajorAction" class="com.ssh.action.HotmajorAction">
+			<property name="hotmajorService" ref="hotmajorService"></property>
+		</bean>
+		<!-- 老师对应学生人数报表 -->
+		 <bean id="jfreeAction" class="com.ssh.action.JFreeTeaStuAction">
+		 	<property name="studentService" ref="studentService"></property>
+			<property name="teacherService" ref="teacherService"></property>
+		 </bean>
+		 <!-- 天数报名情况 -->
+		 <bean id="jfreeTimeAction" class="com.ssh.action.JFreeTimeCountAction">
+		 	<property name="studentService" ref="studentService"></property>
+		 </bean>
+		 <!-- 学生报名情况 -->
+		 <bean id="pieChartAction" class="com.ssh.action.PieChartAction">
+		 	<property name="studentService" ref="studentService"></property>
+		 	<property name="academyService" ref="academyService"></property>
+		 </bean>
+		<!-- 院校专业表 -->
+		<!-- <bean id="academyAction" class="com.ssh.action.AcademyAction">
+			<property name="academyService" ref="academyService"></property>
+		</bean>
+				
+		</bean>		
+		</bean>	 -->	
+		<!-- 招生简章 -->
+		<bean id="generalAction" class="com.ssh.action.GeneralAction">
+			<property name="generalService" ref="generalService"></property>
+			<property name="academyService" ref="academyService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+		</bean>
+
+		<!-- 成人教育 -->
+		<bean id="adultAction" class="com.ssh.action.AdultAction">
+			<property name="adultService" ref="adultService"></property>
+		</bean>
+		<!-- 会计报名-->
+		<bean id="accountingAction" class="com.ssh.action.AccountingAction">
+			<property name="accountingService" ref="accountingService"></property>
+		</bean>
+		<!-- 国家开放-->
+		<bean id="countryAction" class="com.ssh.action.CountryAction">
+			<property name="countryService" ref="countryService"></property>
+		</bean>
+		<!-- 远程教育报名-->
+		<bean id="distanceAction" class="com.ssh.action.DistanceAction">
+			<property name="distanceService" ref="distanceService"></property>
+		</bean>
+		<!-- 艺考培训-->
+		<bean id="artsAction" class="com.ssh.action.ArtsAction">
+			<property name="artsService" ref="artsService"></property>
+		</bean>
+		<!-- 职业资格-->
+		<bean id="vocationalAction" class="com.ssh.action.VocationalAction">
+			<property name="vocationalService" ref="vocationalService"></property>
+		</bean>
+		
+		<!-- 日志表 -->
+		<bean id="logfAction" class="com.ssh.action.LogfAction">
+			<property name="logfService" ref="logfService"></property>
+		</bean>
+
+		<!-- 工作助手 -->
+		<bean id="workAssistAction" class="com.ssh.action.WorkAssistAction">
+			<property name="workAssistService" ref="workAssistService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+			<property name="teacherService" ref="teacherService"></property>
+		</bean>
+
+		<!-- 缴费表 -->
+		<bean id="fianceAction" class="com.ssh.action.FianceAction">
+			<property name="fianceService" ref="fianceService"></property>
+			<property name="studentService" ref="studentService"></property>
+			<property name="teacherService" ref="teacherService"></property>
+		</bean>
+		
+		<!-- 角色表 -->
+		<bean id="roleAction" class="com.ssh.action.RoleAction">
+			<property name="roleService" ref="roleService"></property>
+			<property name="teacherService" ref="teacherService"></property>
+			<property name="departmentService" ref="departmentService"></property>
+		</bean>
+		<!-- 上传文件 -->
+		<bean id="importAction" class="com.ssh.action.ImportAction">
+			<property name="fianceService" ref="fianceService"></property>
+			<property name="studentService" ref="studentService"></property>
+		</bean>
+		
+		<!-- 共享合作 -->
+		<bean id="joinworkAction" class="com.ssh.action.JoinworkAction">
+			<property name="joinworkService" ref="joinworkService"></property>
+			<property name="indexcontentService" ref="indexcontentService"></property>
+			<property name="contactService" ref="contactService"></property>
+		</bean>
+</beans>

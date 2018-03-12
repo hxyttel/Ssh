@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- 国家开放报名 -->
+	<class name="com.ssh.pojo.Country" table="country">
+		<id name="cyid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="cyname" type="java.lang.String"></property>
+		<property name="cypicture" type="java.lang.String"></property>
+		<property name="cyaddress" type="java.lang.String"></property>
+		<property name="cytitle" type="java.lang.String"></property>
+		<property name="cyphoto1" type="java.lang.String"></property>
+		<property name="cycontent" type="java.lang.String"></property>
+		<property name="cyphoto2" type="java.lang.String"></property>
+	</class>
+</hibernate-mapping>

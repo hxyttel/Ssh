@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	 <!-- 配置每一个service类 id属性（名字是任意取，但最好是取当前action的类名） class属性(是当前serviceImpl类的路径)
+			name属性是你要对应的对象名 ref属性也是对应的对象名  
+				（配置xml规则:action对应的的是service的在applicationContext.xml的bean里面的id名字）
+						service对应的的是dao的在applicationContext.xml的bean里面的id名字
+							dao是对应hibernateTemplate 
+					name属性和ref属性的值最好一样
+					
+				每一个类对应不同的action和service和dao
+		
+		eg:<bean id="xxxAction" class="com.ssh.service.impl.xxxServiceImpl">
+			<property name="xxxDao" ref="xxxDao"></property>
+			</bean> 
+			
+			-->
+	<!-- 教师表 -->		
+	<bean id="teacherService" class="com.ssh.service.impl.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>
+	<!-- 学生表 -->
+	<bean id="studentService" class="com.ssh.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<!-- 院校专业表  -->
+	<bean id="academyService" class="com.ssh.service.impl.AcademyServiceImpl">
+		<property name="academyDao" ref="academyDao"></property>
+	</bean>
+	
+	<!-- 热门专业表 -->
+	<bean id="hotmajorService" class="com.ssh.service.impl.HotmajorServiceImpl">
+		<property name="hotmajorDao" ref="hotmajorDao"></property>
+	</bean>
+	<!-- 轮播图表 -->
+	<bean id="indexpictureService" class="com.ssh.service.impl.IndexPictureServiceImpl">
+		<property name="indexpictureDao" ref="indexpictureDao"></property>
+	</bean>	
+	<!-- 首页内容表 -->
+	<bean id="indexcontentService" class="com.ssh.service.impl.IndexContetServiceImpl">
+		<property name="indexcontentDao" ref="indexcontentDao"></property>
+	</bean>
+	<!-- 联系表 -->
+	<bean id="contactService" class="com.ssh.service.impl.ContactServiceImpl">
+		<property name="contactDao" ref="contactDao"></property>
+	</bean>
+	
+	<!-- 公告表 -->
+	<bean id="noticeService" class="com.ssh.service.impl.NoticeServiceImpl">
+		<property name="noticeDao" ref="noticeDao"></property>
+	</bean>
+	
+	<!-- 部门表 -->
+	<bean id="departmentService" class="com.ssh.service.impl.DepartmentServiceImpl">
+		<property name="departmentDao" ref="departmentDao"></property>
+	</bean>
+	
+	<!-- 会计报名表 -->
+	<bean id="accountingService" class="com.ssh.service.impl.AccountingServiceImpl">
+		<property name="accountingDao" ref="accountingDao"></property>
+	</bean>
+	
+	<!-- 艺考培训报名表 -->
+	<bean id="artsService" class="com.ssh.service.impl.ArtsServiceImpl">
+		<property name="artsDao" ref="artsDao"></property>
+	</bean>
+	
+	<!-- 职业资格报名表 -->
+	<bean id="vocationalService" class="com.ssh.service.impl.VocationalServiceImpl">
+		<property name="vocationalDao" ref="vocationalDao"></property>
+	</bean>
+	
+	<!-- 成人教育报名表 -->
+	<bean id="adultService" class="com.ssh.service.impl.AdultServiceImpl">
+		<property name="adultDao" ref="adultDao"></property>
+	</bean>
+	
+	<!-- 国家开放报名表 -->
+	<bean id="countryService" class="com.ssh.service.impl.CountryServiceImpl">
+		<property name="countryDao" ref="countryDao"></property>
+	</bean>
+	
+	<!-- 远程教育报名表 -->
+	<bean id="distanceService" class="com.ssh.service.impl.DistanceServiceImpl">
+		<property name="distanceDao" ref="distanceDao"></property>
+	</bean>
+	<!-- 招生简章 -->
+	<bean id="generalService" class="com.ssh.service.impl.GeneralServiceImpl">
+		<property name="generalDao" ref="generalDao"></property>
+	</bean>
+	
+	<!-- 文件上传表 -->
+	<bean id="studentfileService" class="com.ssh.service.impl.UploadServiceImpl">
+		<property name="studentfileDao" ref="studentfileDao"></property>
+	</bean>
+	
+	<!-- 专业表 -->
+	<bean id="majorService" class="com.ssh.service.impl.MajorServiceImpl">
+		<property name="majorDao" ref="majorDao"></property>
+	</bean>
+	
+	<!-- 日志表 -->
+	<bean id="logfService" class="com.ssh.service.impl.LogfServiceImpl">
+		<property name="logfDao" ref="logfDao"></property>
+	</bean>
+	
+	<!-- 工作助手表 -->
+	<bean id="workAssistService" class="com.ssh.service.impl.WorkAssistServiceImpl">
+		<property name="workAssistDao" ref="workAssistDao"></property>
+	</bean>
+
+	<!-- 缴费表 -->
+	<bean id="fianceService" class="com.ssh.service.impl.FianceServiceImpl">
+		<property name="fianceDao" ref="fianceDao"></property>
+	</bean>
+	<!-- 共享合作 -->
+	<bean id="joinworkService" class="com.ssh.service.impl.JoinworkServiceImpl">
+		<property name="joinworkDao" ref="joinworkDao"></property>
+	</bean>
+
+	<!-- 角色表 -->
+	<bean id="roleService" class="com.ssh.service.impl.RoleServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+	</bean>
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Rolejur" table="rolejur">
+		 <id name="rjid" type="java.lang.Integer">
+		 	<generator class="native"></generator>
+		 </id>
+		 <property name="whether" type="java.lang.Integer"></property>
+		 <property name="rid" type="java.lang.Integer"></property>
+		 <property name="jid" type="java.lang.Integer"></property>	
+		 <many-to-one name="roels" class="com.ssh.pojo.Roels" column="rid" insert="false" update="false"></many-to-one>	
+		 <many-to-one name="jurisdication" class="com.ssh.pojo.Jurisdication" column="jid" insert="false" update="false"></many-to-one>	
+	</class>
+
+</hibernate-mapping>

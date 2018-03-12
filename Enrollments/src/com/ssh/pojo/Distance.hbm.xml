@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!-- 远程教育报名 -->
+	<class name="com.ssh.pojo.Distance" table="distance">
+		<id name="deid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="dename" type="java.lang.String"></property>
+		<property name="depicture" type="java.lang.String"></property>
+		<property name="deaddress" type="java.lang.String"></property>
+		<property name="detitle" type="java.lang.String"></property>
+		<property name="dephoto1" type="java.lang.String"></property>
+		<property name="decontent" type="java.lang.String"></property>
+		<property name="dephoto2" type="java.lang.String"></property>
+	</class>
+</hibernate-mapping>

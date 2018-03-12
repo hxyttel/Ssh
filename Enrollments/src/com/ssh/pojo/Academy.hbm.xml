@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ssh.pojo.Academy" table="academy">
+		<id name="aid" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="aname" type="java.lang.String"></property>
+		<property name="amajor" type="java.lang.String"></property>
+		<set name="student" cascade="all">
+			<key column="academyid"></key>
+			<one-to-many class="com.ssh.pojo.Student"></one-to-many>
+		</set>
+		<set name="major" cascade="all">
+			<key column="academyid"></key>
+			<one-to-many class="com.ssh.pojo.Major"></one-to-many>
+		</set>
+      <one-to-one name="general" class="com.ssh.pojo.General" cascade="all"></one-to-one>
+	</class>
+</hibernate-mapping>
